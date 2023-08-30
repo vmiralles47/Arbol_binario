@@ -20,7 +20,9 @@ Reto: Crear una estructura de árbol binario:
 """
 MI SOLUCIÓN:
 lo he intentado con nodos con hijos pero no soy capaz
+
 creo clas Nodobinario y clase Arbolbinario , que estará formada de nodos binarios y controlará todo.
+
 el primer nodo será la raíz del arbol y todo se recorrerá en relación a ella
 el arbol está formado de nodos binarios, y tiene métodos para insertar, buscar, borrar y mostrarlo, que requerirán a su vez
 métodos para recorrerlo
