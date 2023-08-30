@@ -15,7 +15,7 @@ class Nodo_bin():
         self.hijo_mayor = None
 
     def __str__(self):
-        return f"NODO {self.valor} -- [{self.hijo_menor} - {self.hijo_mayor}]"
+        return f"NODO {self.valor} --  [{self.hijo_menor} - {self.hijo_mayor}]"
 
     def __repr__(self):
         return self.__str__()
@@ -29,8 +29,13 @@ class Arbol_bin():
         else:
             self.raiz = nodo
 
+        self.lista_valores = [nodo.valor]
+        self.lista_valores_asc = [0]
+
     def __str__(self):
-        return f"arbol {self.raiz}"
+        self.lista_valores_asc = [0]
+        self.valor_asc(self.raiz)
+        return f"arbol {self.lista_valores_asc}"
 
     def __repr__(self):
         return self.__str__()
@@ -79,3 +84,51 @@ class Arbol_bin():
                         nodo_actual, nodo_a_insertar)  # llamada recursiva?
 
     # def agrega_nodo(nodo_a_insertar, nodo_donde_insertar):
+    """""
+    def tiene_nietos (self, nodo):
+       return (
+           nodo.hijo_menor.hijo_menor is not None 
+           or 
+           nodo.hijo_menor.hijo_mayor is not None 
+           or 
+           nodo.hijo_mayor.hijo_menor is not None 
+           or 
+           nodo.hijo_mayor.hijo_menor is not None)
+    """
+
+    def agrega_valor(self, valor):
+        if self.lista_valores_asc == [0]:
+            self.lista_valores_asc[0] = valor
+        else:
+            self.lista_valores_asc.append(valor)
+
+    def valor_asc(self, nodo):
+        nodo_actual = nodo
+       # nodo sin hijos
+        if nodo_actual.hijo_menor is None and nodo_actual.hijo_mayor is None:
+            self.agrega_valor(nodo.valor)
+            return self.lista_valores_asc
+        # nodo con hijo_menor y NO hijo_mayor - bajamos de nivel x la izquierda
+        if nodo_actual.hijo_menor is not None and nodo_actual.hijo_mayor is None:
+            nodo_actual = nodo_actual.hijo_menor
+            self.valor_asc(nodo_actual)
+            nodo_actual = nodo
+            self.agrega_valor(nodo_actual.valor)
+            return self.lista_valores_asc
+
+        # nodo sin hijo menor y con hijo mayor - guardamos el valor y bajamos de nivel por la derecha
+        if nodo_actual.hijo_menor is None and nodo_actual.hijo_mayor is not None:
+            self.agrega_valor(nodo_actual.valor)
+            nodo_actual = nodo_actual.hijo_mayor
+            self.valor_asc(nodo_actual)
+
+            return self.lista_valores_asc
+        # nodo con ambos hijos: bajamos por la izq , guardamos el valor del nodoy bajamos por la dcha
+        if nodo_actual.hijo_menor is not None and nodo_actual.hijo_mayor is not None:
+            nodo_actual = nodo_actual.hijo_menor
+            self.valor_asc(nodo_actual)
+            nodo_actual = nodo
+            self.agrega_valor(nodo_actual.valor)
+            nodo_actual = nodo_actual.hijo_mayor
+            self.valor_asc(nodo_actual)
+            return self.lista_valores_asc
