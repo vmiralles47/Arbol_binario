@@ -1,3 +1,6 @@
+# de momento crea y pinta el arbol del reto
+# recorre el arbol y el __str__ representa las inserciones en orden ascendente
+
 from arbol_binario import Nodo_bin, Arbol_bin
 
 arbol = Arbol_bin(Nodo_bin(5))
