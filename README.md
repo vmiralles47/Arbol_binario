@@ -24,8 +24,11 @@ lo he intentado con nodos con hijos pero no soy capaz
 creo clas Nodobinario y clase Arbolbinario , que estará formada de nodos binarios y controlará todo.
 
 el primer nodo será la raíz del arbol y todo se recorrerá en relación a ella
+
 el arbol está formado de nodos binarios, y tiene métodos para insertar, buscar, borrar y mostrarlo, que requerirán a su vez
 métodos para recorrerlo
+
 cada Nodo_bin tiene un valor y dos hijos, el menor y el mayor
-de momenot no he implementado __repr__/__str__ según requerimientos
+
+de momento no he implementado __repr__/__str__ según requerimientos
 """
