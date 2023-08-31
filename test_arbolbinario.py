@@ -26,3 +26,7 @@ print(arbol)
 
 arbol.inserta_nodo(Nodo_bin(9))
 print(arbol)
+
+# invoca a la funcion que recorre el arbol de manera descendente y luego imprime la lista de valores descententes
+arbol.valor_desc(arbol.raiz)
+print(arbol.lista_valores_desc)
