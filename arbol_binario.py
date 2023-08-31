@@ -31,6 +31,7 @@ class Arbol_bin():
 
         self.lista_valores = [nodo.valor]
         self.lista_valores_asc = [0]
+        self.lista_valores_desc = [0]
 
     def __str__(self):
         self.lista_valores_asc = [0]
@@ -132,3 +133,42 @@ class Arbol_bin():
             nodo_actual = nodo_actual.hijo_mayor
             self.valor_asc(nodo_actual)
             return self.lista_valores_asc
+
+    def agrega_valor_desc(self, valor):
+        if self.lista_valores_desc == [0]:
+            self.lista_valores_desc[0] = valor
+        else:
+            self.lista_valores_desc.append(valor)
+
+    def valor_desc(self, nodo):
+        nodo_actual = nodo
+        # nodo sin hijos
+        if nodo_actual.hijo_menor is None and nodo_actual.hijo_mayor is None:
+            self.agrega_valor_desc(nodo.valor)
+            return self.lista_valores_desc
+
+        # nodo con ambos hijos: bajamos por la derecha ,luego  guardamos el valor del nodo y bajamos por la izqd
+        if nodo_actual.hijo_menor is not None and nodo_actual.hijo_mayor is not None:
+            nodo_actual = nodo_actual.hijo_mayor
+            self.valor_desc(nodo_actual)
+            nodo_actual = nodo
+            self.agrega_valor_desc(nodo_actual.valor)
+            nodo_actual = nodo_actual.hijo_menor
+            self.valor_desc(nodo_actual)
+            return self.lista_valores_desc
+
+        # nodo con hijo_menor y NO hijo_mayor - guardamos el valor bajamos de nivel x la izquierda
+        if nodo_actual.hijo_menor is not None and nodo_actual.hijo_mayor is None:
+            self.agrega_valor_desc(nodo_actual.valor)
+            nodo_actual = nodo_actual.hijo_menor
+            self.valor_desc(nodo_actual)
+            nodo_actual = nodo
+            return self.lista_valores_desc
+
+        # nodo sin hijo menor y con hijo mayor - y bajamos de nivel por la derecha,y luego guardamos el valor del nodo
+        if nodo_actual.hijo_menor is None and nodo_actual.hijo_mayor is not None:
+            nodo_actual = nodo_actual.hijo_mayor
+            self.valor_desc(nodo_actual)
+            nodo_actual = nodo
+            self.agrega_valor_desc(nodo_actual.valor)
+            return self.lista_valores_desc
